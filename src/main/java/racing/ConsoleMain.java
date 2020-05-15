@@ -5,10 +5,10 @@ import racing.view.ResultView;
 
 public class ConsoleMain {
     public static void main(String[] args) {
-        int numOfCars = InputView.inputNumOfCars();
-        int round = InputView.inputRound();
+        String names = InputView.getNames();
+        int round = InputView.getRound();
 
-        RacingGame racingGame = RacingGame.init(numOfCars, round);
+        RacingGame racingGame = RacingGame.init(names, round);
         ResultView.printResultStatement(racingGame.curState());
 
         while(!racingGame.isRaceOver()) {
@@ -16,5 +16,7 @@ public class ConsoleMain {
 
             ResultView.printCurState(racingGame.curState());
         }
+
+        ResultView.printWinners(racingGame.getWinners());
     }
 }

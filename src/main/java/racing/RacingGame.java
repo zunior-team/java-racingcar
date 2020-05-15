@@ -16,15 +16,15 @@ public class RacingGame {
     private final Cars cars;
     private final MoveStrategy moveStrategy;
 
-    private RacingGame(final int numOfCars, final int round) {
-        this(numOfCars, round, new RandomMoveStrategy(new Random()));
+    public RacingGame(final String namesStr, final int round) {
+        this(namesStr, round, new RandomMoveStrategy(new Random()));
     }
 
-    private RacingGame(final int numOfCars, final int round, final MoveStrategy moveStrategy) {
+    public RacingGame(final String namesStr, final int round, final MoveStrategy moveStrategy) {
         validate(round);
 
         this.round = round;
-        this.cars = Cars.of(numOfCars);
+        this.cars = Cars.init(namesStr);
         this.moveStrategy = moveStrategy;
     }
 
@@ -34,12 +34,12 @@ public class RacingGame {
         }
     }
 
-    public static RacingGame init(final int numOfCars, final int round, final MoveStrategy moveStrategy) {
-        return new RacingGame(numOfCars, round, moveStrategy);
+    public static RacingGame init(final String namesStr, final int round, final MoveStrategy moveStrategy) {
+        return new RacingGame(namesStr, round, moveStrategy);
     }
 
-    public static RacingGame init(final int numOfCars, final int round) {
-        return new RacingGame(numOfCars, round);
+    public static RacingGame init(final String namesStr, final int round) {
+        return new RacingGame(namesStr, round);
     }
 
     public void race() {
@@ -52,10 +52,14 @@ public class RacingGame {
     }
 
     public boolean isRaceOver() {
-        return round <= 0;
+        return round <= MINIMUM_ROUND;
     }
 
     public List<CarDto> curState() {
         return cars.getCarDtos();
+    }
+
+    public List<CarDto> getWinners() {
+        return cars.getWinners();
     }
 }

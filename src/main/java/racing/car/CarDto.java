@@ -1,9 +1,11 @@
 package racing.car;
 
 public class CarDto {
-    private int position;
+    private final String name;
+    private final int position;
 
     private CarDto(Car car) {
+        this.name = car.getName();
         this.position = car.curPosition();
     }
 
@@ -11,11 +13,11 @@ public class CarDto {
         return new CarDto(car);
     }
 
-    public int getPosition() {
-        return position;
+    public String getName() {
+        return name;
     }
 
-    public void setPosition(final int position) {
-        this.position = position;
+    public int getPosition() {
+        return position;
     }
 }
